@@ -57,6 +57,22 @@
   color:white;
   text-decoration:none;
   }
+/*drop down sort by*/
+button:focus {outline:0 !important;}
+
+.dropdownSort {
+  border-color: #ffc5c2;
+}
+
+.dropdownSort:hover {
+  border-color: white;
+}
+
+button.dropdownSort:focus {
+  border: none;
+  outline:0 !important;
+}
+
 
 /* line 13, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_extend.scss */
 .overlay::before {
