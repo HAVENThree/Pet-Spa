@@ -62,6 +62,7 @@ button:focus {outline:0 !important;}
 
 .dropdownSort {
   border-color: #ffc5c2;
+  background-color: white;
 }
 
 .dropdownSort:hover {
