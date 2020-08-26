@@ -21,7 +21,10 @@
   -ms-flex-pack: start;
   justify-content: start;
 }
-
+/*Navigation current*/
+#navigation > .current a{
+  color: tomato;
+}
 /* search style */
 .searchbar{
   margin-bottom: auto;
