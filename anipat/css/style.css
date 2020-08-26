@@ -1,6 +1,44 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,700|Poppins:200,200i,300,300i,400,500,500i,600,700,800,900&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,700|Poppins:200,200i,300,300i,400,500,500i,600,700,800,900&display=swap");
 
+
+#goTopButton {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+#goTopButton::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#goTopButton:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#goTopButton:active {
+  background-color: #555;
+}
+#goTopButton.show {
+  opacity: 1;
+  visibility: visible;
+}
+
 .btn-dark{
   background-color: #ed5b0d;
   border-color:#ed5b0d;
@@ -20,6 +58,12 @@
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: start;
+}
+/*style bread crumb*/
+.breadcrumb a {color: #ed5b0d;}
+.breadcrumb a:hover {
+  color: #ec290f;
+  font-weight: bold;
 }
 
 /* search style */
