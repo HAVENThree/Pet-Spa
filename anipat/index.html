@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/themify-icons.css  ">
     <link rel="stylesheet" href="css/nice-select.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/gijgo.css">
@@ -29,6 +29,7 @@
 </head>
 
 <body>
+    <a id="goTopButton" href="#"></a>
     <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
@@ -67,6 +68,11 @@
             </div>
         </div>
     </header>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">Home</li>
+        </ol>
+      </nav>
 
     <!-- slider_area_start -->
     <div class="slider_area">
@@ -236,13 +242,16 @@
                         </div>
                         <div class="contact_btn d-flex align-items-center justify-content-center">
                             <a href="contact.html" class="boxed-btn4">Contact Us</a>
-                            <p>Or  <a href="#"> +35 752 7322</a></p>
+                            <p>Or  <a href="tel: +35 752 7322"> +35 752 7322</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
+    
     <!-- footer_start  -->
     <footer class="footer">
         <div class="footer_top">
@@ -345,7 +354,9 @@
     <!-- footer_end  -->
 
 
+    
     <!-- JS here -->
+    <script src="js/to-top.js"></script>
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -391,6 +402,23 @@
         var timepicker = $('#timepicker').timepicker({
          format: 'HH.MM'
      });
+     var btn = $('#goTopButton');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+
+
+     
     </script>
 </body>
 
