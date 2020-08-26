@@ -15,11 +15,17 @@ import com.project.springboot.services.ProductService;
 public class HomeController {
 	@Autowired
 	private ProductService productService;
-	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
-	public String viewIndex(Model model) {
-		List<Product> temp = productService.findAll();
-		model.addAttribute("products", productService.findAll()
-				.stream().collect(Collectors.toList()));
-		return "index";
-	}
+	@RequestMapping("/index")
+    public String getHomepage() {
+        return "index";
+    }
+
+	
+	
+	//	public String viewIndex(Model model) {
+//		List<Product> temp = productService.findAll();
+//		model.addAttribute("products", productService.findAll()
+//				.stream().collect(Collectors.toList()));
+//		return "index";
+//	}
 }
