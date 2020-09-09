@@ -13,17 +13,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.springboot.services.ProductService;
 
-
 @Controller
 public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@RequestMapping(value = { "/","/product" }, method = RequestMethod.GET)
+	@RequestMapping("/products")
 	public String ViewProductList(Model model) {
-		model.addAttribute("products", productService.findAll());
-		return "product";
+		return "products";
 	}
+	
+	 @RequestMapping(value = { "/products" }, method = RequestMethod.GET)
+	    public String productList(Model model) {
+	 
+	        model.addAttribute("products", productService.findAll());
+	 
+	        return "producrs";
+	    }
+
+//	@RequestMapping(value = { "/products" }, method = RequestMethod.GET)
+//	public String ViewProductList(Model model) {
+//		model.addAttribute("products", productService.findAll());
+//		return "products";
+//	}
 //
 //	@RequestMapping(value = { "alphabetAsc" }, method = RequestMethod.GET)
 //	public String ViewProductListAlphabetAsc(Model model) {
