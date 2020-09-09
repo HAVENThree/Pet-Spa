@@ -22,12 +22,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.project.springboot.entity.Product;
 import com.project.springboot.services.ProductService;
 
+<<<<<<< HEAD
 @CrossOrigin
 @RestController
+=======
+@Controller
+>>>>>>> 617f3cc614deeae56eac849963a23355881a56fe
 public class ProductController {
 	@Autowired
 	private ProductService productService;
 
+<<<<<<< HEAD
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public ResponseEntity<List<Product>> findAll() {
         List<Product> products = productService.findAll();
@@ -71,6 +76,62 @@ public class ProductController {
         }
         currentProduct.get().setName(product.getName());
         currentProduct.get().setPrice(product.getPrice());
+=======
+	@RequestMapping("/products")
+	public String ViewProductList(Model model) {
+		return "products";
+	}
+	
+	 @RequestMapping(value = { "/products" }, method = RequestMethod.GET)
+	    public String productList(Model model) {
+	 
+	        model.addAttribute("products", productService.findAll());
+	 
+	        return "producrs";
+	    }
+
+//	@RequestMapping(value = { "/products" }, method = RequestMethod.GET)
+//	public String ViewProductList(Model model) {
+//		model.addAttribute("products", productService.findAll());
+//		return "products";
+//	}
+//
+//	@RequestMapping(value = { "alphabetAsc" }, method = RequestMethod.GET)
+//	public String ViewProductListAlphabetAsc(Model model) {
+//		Comparator<Product> compareName = (Product p1, Product p2) -> p1.getName().compareTo(p2.getName());
+//		List<Product> list = new ArrayList<Product>(productService.findAll());
+//		Collections.sort(list, compareName);
+//		model.addAttribute("products", list);
+//		return "productList";
+//	}
+//
+//	@RequestMapping(value = { "alphabetDesc" }, method = RequestMethod.GET)
+//	public String ViewProductListAlphabetDesc(Model model) {
+//		Comparator<Product> compareName = (Product p1, Product p2) -> p1.getName().compareTo(p2.getName());
+//		List<Product> list = new ArrayList<Product>(productService.findAll());
+//		Collections.sort(list, compareName.reversed());
+//		model.addAttribute("products", list);
+//		return "productList";
+//	}
+//
+//	@RequestMapping(value = { "highToLowPrice" }, method = RequestMethod.GET)
+//	public String ViewProductListHighToLowPrice(Model model) {
+//		Comparator<Product> comparePrice = (Product p1, Product p2) -> p1.getPrice().compareTo(p2.getPrice());
+//		List<Product> list = new ArrayList<Product>(productService.findAll());
+//		Collections.sort(list, comparePrice.reversed());
+//		model.addAttribute("products", list);
+//		return "productList";
+//	}
+//
+//	@RequestMapping(value = { "lowToHighPrice" }, method = RequestMethod.GET)
+//	public String ViewProductListLowToHighPrice(Model model) {
+//		Comparator<Product> comparePrice = (Product p1, Product p2) -> p1.getPrice().compareTo(p2.getPrice());
+//		List<Product> list = new ArrayList<Product>(productService.findAll());
+//		Collections.sort(list, comparePrice);
+//		model.addAttribute("products", list);
+//		return "productList";
+//	}
+>>>>>>> 617f3cc614deeae56eac849963a23355881a56fe
 
         productService.save(currentProduct.get());
         return new ResponseEntity<>(currentProduct.get(), HttpStatus.OK);
