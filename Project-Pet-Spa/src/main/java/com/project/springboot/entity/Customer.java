@@ -27,6 +27,7 @@ public class Customer {
 	@OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
 	private List<Bill> Bills;
 	
+	public Customer() {}
 	public Customer(Integer id, String name, String phone, String address) {
 		super();
 		this.id = id;

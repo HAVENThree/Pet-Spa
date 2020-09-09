@@ -29,7 +29,7 @@ public class Bill {
 //	@OneToMany(mappedBy = "bill",cascade = CascadeType.ALL)
 //	private List<InvoiceBill> invoiceBills;
 	
-
+	public Bill() {}
 	public Bill(Integer id, Date date) {
 		super();
 		this.id = id;
