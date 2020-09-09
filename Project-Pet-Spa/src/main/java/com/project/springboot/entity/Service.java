@@ -1,6 +1,5 @@
 package com.project.springboot.entity;
 
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,8 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "service")
+public class Service {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -26,17 +25,18 @@ public class Product {
 	@Column(length = 10)
 	private Double Price;
 	
-	@ManyToOne 
-	private ProductType productType;
+	@ManyToOne
+	private ServiceType serviceType;
 	
-//	@OneToMany(mappedBy = "products",cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "service",cascade = CascadeType.ALL)
 //	private List<InvoiceBill> invoiceBills;
 	
-	public Product() {}
-	public Product(Integer id, String name, Double price) {
+	public Service() {}
+	public Service(Integer id, String name, String image, Double price) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.image = image;
 		Price = price;
 	}
 	public Integer getId() {
@@ -51,11 +51,23 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public Double getPrice() {
 		return Price;
 	}
 	public void setPrice(Double price) {
 		Price = price;
+	}
+	public ServiceType getServiceType() {
+		return serviceType;
+	}
+	public void setServiceType(ServiceType serviceType) {
+		this.serviceType = serviceType;
 	}
 	@Override
 	public int hashCode() {
@@ -63,7 +75,9 @@ public class Product {
 		int result = 1;
 		result = prime * result + ((Price == null) ? 0 : Price.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((serviceType == null) ? 0 : serviceType.hashCode());
 		return result;
 	}
 	@Override
@@ -74,7 +88,7 @@ public class Product {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Product other = (Product) obj;
+		Service other = (Service) obj;
 		if (Price == null) {
 			if (other.Price != null)
 				return false;
@@ -85,13 +99,22 @@ public class Product {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (image == null) {
+			if (other.image != null)
+				return false;
+		} else if (!image.equals(other.image))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (serviceType == null) {
+			if (other.serviceType != null)
+				return false;
+		} else if (!serviceType.equals(other.serviceType))
+			return false;
 		return true;
 	}
-	
-	
+
 }

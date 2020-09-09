@@ -21,8 +21,8 @@ public class InvoiceBillService {
 	public InvoiceBill save(InvoiceBill invoiceBill) {
 		return invoiceBillRepository.save(invoiceBill);
 	}
-	public void delete(Integer productId, Integer billId) {
-		EmbededInvoiceBill em = new EmbededInvoiceBill(productId, billId);
+	public void delete(Integer productId,Integer serviceId,Integer billId) {
+		EmbededInvoiceBill em = new EmbededInvoiceBill(productId, serviceId, billId);
 		invoiceBillRepository.deleteById(em);
 	}
 }

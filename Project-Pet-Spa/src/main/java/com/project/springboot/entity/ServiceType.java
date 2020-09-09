@@ -1,60 +1,52 @@
 package com.project.springboot.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "bill")
-public class Bill {
+@Table(name="service_type")
+public class ServiceType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Temporal(TemporalType.DATE)
-	private Date date;
+	@Column(length = 50)
+	private String name;
 	
-	@ManyToOne
-	private Customer customer;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Service> services;
 	
-//	@OneToMany(mappedBy = "bill",cascade = CascadeType.ALL)
-//	private List<InvoiceBill> invoiceBills;
-	
-
-	public Bill(Integer id, Date date) {
+	public ServiceType(){}
+	public ServiceType(Integer id, String name) {
 		super();
 		this.id = id;
-		this.date = date;
+		this.name = name;
 	}
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Date getDate() {
-		return date;
+	public String getName() {
+		return name;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setName(String name) {
+		this.name = name;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 	@Override
@@ -65,19 +57,19 @@ public class Bill {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Bill other = (Bill) obj;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
+		ServiceType other = (ServiceType) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		return true;
 	}
-	
+
 	
 }

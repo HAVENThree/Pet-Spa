@@ -14,11 +14,15 @@ import javax.persistence.Table;
 public class InvoiceBill implements Serializable{
 	@EmbeddedId
 	private EmbededInvoiceBill id = new EmbededInvoiceBill();
-	@ManyToOne(optional = false)
+	@ManyToOne()
 	@MapsId("productId")
 	private Product product;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne()
+	@MapsId("serviceId")
+	private Service service;
+	
+	@ManyToOne()
 	@MapsId("billId")
 	private Bill bill;
 	
@@ -30,11 +34,13 @@ public class InvoiceBill implements Serializable{
 	private String discription;
 	
 	
-	public InvoiceBill(EmbededInvoiceBill id, Product product, Bill bill, Integer amount, Integer price,
-			String discription) {
+	public InvoiceBill() {}
+	public InvoiceBill(EmbededInvoiceBill id, Product product, Service service, Bill bill, Integer amount,
+			Integer price, String discription) {
 		super();
 		this.id = id;
 		this.product = product;
+		this.service = service;
 		this.bill = bill;
 		this.amount = amount;
 		this.price = price;
@@ -51,6 +57,12 @@ public class InvoiceBill implements Serializable{
 	}
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+	public Service getService() {
+		return service;
+	}
+	public void setService(Service service) {
+		this.service = service;
 	}
 	public Bill getBill() {
 		return bill;
@@ -86,6 +98,7 @@ public class InvoiceBill implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		return result;
 	}
 	@Override
@@ -126,6 +139,11 @@ public class InvoiceBill implements Serializable{
 			if (other.product != null)
 				return false;
 		} else if (!product.equals(other.product))
+			return false;
+		if (service == null) {
+			if (other.service != null)
+				return false;
+		} else if (!service.equals(other.service))
 			return false;
 		return true;
 	}

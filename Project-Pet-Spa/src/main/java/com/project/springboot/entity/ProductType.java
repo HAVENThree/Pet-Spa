@@ -23,6 +23,7 @@ public class ProductType {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Product> products;
 	
+	public ProductType() {}
 	public ProductType(Integer id, String name) {
 		super();
 		this.id = id;

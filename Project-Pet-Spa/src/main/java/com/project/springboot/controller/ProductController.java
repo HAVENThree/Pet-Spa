@@ -11,19 +11,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.project.springboot.entity.Product;
 import com.project.springboot.services.ProductService;
+
 
 @Controller
 public class ProductController {
-//	@Autowired
-//	private ProductService productService;
-//
-//	@RequestMapping(value = { "/productList" }, method = RequestMethod.GET)
-//	public String ViewProductList(Model model) {
-//		model.addAttribute("products", productService.findAll());
-//		return "productList";
-//	}
+	@Autowired
+	private ProductService productService;
+
+	@RequestMapping(value = { "/","/product" }, method = RequestMethod.GET)
+	public String ViewProductList(Model model) {
+		model.addAttribute("products", productService.findAll());
+		return "product";
+	}
 //
 //	@RequestMapping(value = { "alphabetAsc" }, method = RequestMethod.GET)
 //	public String ViewProductListAlphabetAsc(Model model) {
