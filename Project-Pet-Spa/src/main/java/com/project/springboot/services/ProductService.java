@@ -1,6 +1,7 @@
 package com.project.springboot.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -19,9 +20,9 @@ public class ProductService {
 	public List<Product> findAll(){
 		return productRepository.findAll();
 	}
-	public Product findById(Integer id) {
-		return productRepository.findById(id).get();
-	}
+    public Optional<Product> findById(Integer id) {
+        return productRepository.findById(id);
+    }
 	public Product save(Product product) {
 		return productRepository.save(product);
 	}

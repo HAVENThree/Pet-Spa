@@ -19,6 +19,8 @@ public class Service {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(length = 50)
+	private String SER_CODE;
+	@Column(length = 50)
 	private String name;
 	@Column(length = 255)
 	private String image;
@@ -32,13 +34,25 @@ public class Service {
 //	private List<InvoiceBill> invoiceBills;
 	
 	public Service() {}
-	public Service(Integer id, String name, String image, Double price) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.image = image;
-		Price = price;
+
+	public Service(Integer id, String sER_CODE, String name, String image, Double price, ServiceType serviceType) {
+	super();
+	this.id = id;
+	SER_CODE = sER_CODE;
+	this.name = name;
+	this.image = image;
+	Price = price;
+	this.serviceType = serviceType;
 	}
+	
+	public String getSER_CODE() {
+		return SER_CODE;
+	}
+
+	public void setSER_CODE(String sER_CODE) {
+		SER_CODE = sER_CODE;
+	}
+
 	public Integer getId() {
 		return id;
 	}
