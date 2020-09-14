@@ -1,6 +1,5 @@
 package com.project.springboot.entity;
 
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,6 +20,13 @@ public class Product {
 	private Integer id;
 	@Column(length = 50)
 	private String PRO_CODE;
+	@Column(length = 50)
+	private String name;
+	@Column(length = 255)
+	private String image;
+	@Column(length = 10)
+	private Double price;
+
 	public String getPRO_CODE() {
 		return PRO_CODE;
 	}
@@ -44,49 +50,50 @@ public class Product {
 	public void setProductType(ProductType productType) {
 		this.productType = productType;
 	}
-	@Column(length = 50)
-	private String name;
-	@Column(length = 255)
-	private String image;
-	@Column(length = 10)
-	private Double price;
-	
-	@ManyToOne 
+
+	@ManyToOne
 	private ProductType productType;
-	
+
 //	@OneToMany(mappedBy = "products",cascade = CascadeType.ALL)
 //	private List<InvoiceBill> invoiceBills;
-	
-	public Product() {}
-	
+
+	public Product() {
+	}
+
 	public Product(Integer id, String pRO_CODE, String name, String image, Double price, ProductType productType) {
-	super();
-	this.id = id;
-	this.PRO_CODE = pRO_CODE;
-	this.name = name;
-	this.image = image;
-	this.price = price;
-	this.productType = productType;
+		super();
+		this.id = id;
+		this.PRO_CODE = pRO_CODE;
+		this.name = name;
+		this.image = image;
+		this.price = price;
+		this.productType = productType;
 	}
 
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Double getPrice() {
 		return price;
 	}
+
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -96,6 +103,7 @@ public class Product {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -123,7 +131,4 @@ public class Product {
 		return true;
 	}
 
-
-	
-	
 }
