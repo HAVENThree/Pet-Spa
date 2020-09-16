@@ -27,6 +27,8 @@ public class InvoiceBill implements Serializable{
 	private Bill bill;
 	
 	@Column(length = 10)
+	private String inbiCode;
+	@Column(length = 10)
 	private Integer amount;
 	@Column(length = 10)
 	private Integer price;
@@ -35,17 +37,28 @@ public class InvoiceBill implements Serializable{
 	
 	
 	public InvoiceBill() {}
-	public InvoiceBill(EmbededInvoiceBill id, Product product, Service service, Bill bill, Integer amount,
-			Integer price, String discription) {
+
+	public InvoiceBill(EmbededInvoiceBill id, Product product, Service service, Bill bill, String inbiCode,
+			Integer amount, Integer price, String discription) {
 		super();
 		this.id = id;
 		this.product = product;
 		this.service = service;
 		this.bill = bill;
+		this.inbiCode = inbiCode;
 		this.amount = amount;
 		this.price = price;
 		this.discription = discription;
 	}
+	
+	public String getInbiCode() {
+		return inbiCode;
+	}
+
+	public void setInbiCode(String inbiCode) {
+		this.inbiCode = inbiCode;
+	}
+
 	public EmbededInvoiceBill getId() {
 		return id;
 	}

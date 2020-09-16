@@ -17,6 +17,8 @@ public class ServiceType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(length = 10)
+	private String stypCode;
 	@Column(length = 50)
 	private String name;
 	
@@ -24,11 +26,31 @@ public class ServiceType {
 	private List<Service> services;
 	
 	public ServiceType(){}
-	public ServiceType(Integer id, String name) {
+
+	public ServiceType(Integer id, String stypCode, String name, List<Service> services) {
 		super();
 		this.id = id;
+		this.stypCode = stypCode;
 		this.name = name;
+		this.services = services;
 	}
+
+	public String getStypCode() {
+		return stypCode;
+	}
+
+	public void setStypCode(String stypCode) {
+		this.stypCode = stypCode;
+	}
+
+	public List<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(List<Service> services) {
+		this.services = services;
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -17,6 +17,8 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(length = 10)
+	private String cusCode;
 	@Column(length = 30)
 	private String name;
 	@Column(length = 15)
@@ -27,13 +29,34 @@ public class Customer {
 	@OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
 	private List<Bill> Bills;
 	
-	public Customer(Integer id, String name, String phone, String address) {
+	public Customer() {}
+	
+	public Customer(Integer id, String cusCode, String name, String phone, String address, List<Bill> bills) {
 		super();
 		this.id = id;
+		this.cusCode = cusCode;
 		this.name = name;
 		this.phone = phone;
 		this.address = address;
+		Bills = bills;
 	}
+
+	public String getCusCode() {
+		return cusCode;
+	}
+
+	public void setCusCode(String cusCode) {
+		this.cusCode = cusCode;
+	}
+
+	public List<Bill> getBills() {
+		return Bills;
+	}
+
+	public void setBills(List<Bill> bills) {
+		Bills = bills;
+	}
+
 	public Integer getId() {
 		return id;
 	}

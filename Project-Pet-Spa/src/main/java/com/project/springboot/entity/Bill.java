@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,8 @@ public class Bill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(length = 10)
+	private String billCode;
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	
@@ -30,11 +33,42 @@ public class Bill {
 //	private List<InvoiceBill> invoiceBills;
 	
 
-	public Bill(Integer id, Date date) {
-		super();
-		this.id = id;
-		this.date = date;
+	public Bill() {}
+	
+
+
+	public Bill(Integer id, String billCode, Date date, Customer customer) {
+	super();
+	this.id = id;
+	this.billCode = billCode;
+	this.date = date;
+	this.customer = customer;
+}
+
+
+
+
+
+	public String getBillCode() {
+		return billCode;
 	}
+
+
+
+	public void setBillCode(String billCode) {
+		this.billCode = billCode;
+	}
+
+
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 	public Integer getId() {
 		return id;
 	}

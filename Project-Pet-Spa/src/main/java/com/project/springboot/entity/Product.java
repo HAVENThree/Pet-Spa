@@ -20,14 +20,8 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(length = 50)
-	private String PRO_CODE;
-	public String getPRO_CODE() {
-		return PRO_CODE;
-	}
+	private String proCode;
 
-	public void setPRO_CODE(String pRO_CODE) {
-		PRO_CODE = pRO_CODE;
-	}
 
 	public String getImage() {
 		return image;
@@ -59,14 +53,23 @@ public class Product {
 	
 	public Product() {}
 	
-	public Product(Integer id, String pRO_CODE, String name, String image, Double price, ProductType productType) {
+
+	public Product(Integer id, String proCode, String name, String image, Double price, ProductType productType) {
 	super();
 	this.id = id;
-	this.PRO_CODE = pRO_CODE;
+	this.proCode = proCode;
 	this.name = name;
 	this.image = image;
 	this.price = price;
 	this.productType = productType;
+	}
+	
+	public String getProCode() {
+		return proCode;
+	}
+
+	public void setProCode(String proCode) {
+		this.proCode = proCode;
 	}
 
 	public Integer getId() {
