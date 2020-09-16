@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.springboot.dao.ServiceTypeRepository;
 import com.project.springboot.entity.ServiceType;
 
 
@@ -15,7 +16,7 @@ import com.project.springboot.entity.ServiceType;
 @Transactional
 public class ServicesTypeService {
 	@Autowired
-	private ServicesTypeService serviceTypeRepository;
+	private ServiceTypeRepository serviceTypeRepository;
 	
 	public List<ServiceType> findAll(){
 		return serviceTypeRepository.findAll();
@@ -27,6 +28,6 @@ public class ServicesTypeService {
 		return serviceTypeRepository.save(serviceType);
 	}
 	public void delete(Integer id) {
-		serviceTypeRepository.delete(id);;
+		serviceTypeRepository.deleteById(id);;
 	}
 }

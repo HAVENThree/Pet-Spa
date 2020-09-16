@@ -1,6 +1,7 @@
 package com.project.springboot.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.springboot.dao.BillRepository;
 import com.project.springboot.entity.Bill;
-import com.project.springboot.entity.ProductType;
 @Service
 @Transactional
 public class BillService {
@@ -19,8 +19,8 @@ public class BillService {
 	public List<Bill> findAll(){
 		return billRepository.findAll();
 	}
-	public Bill findById(Integer id) {
-		return billRepository.findById(id).get();
+	public Optional<Bill> findById(Integer id) {
+		return billRepository.findById(id);
 	}
 	public Bill save(Bill bill) {
 		return billRepository.save(bill);

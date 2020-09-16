@@ -1,6 +1,7 @@
 package com.project.springboot.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -18,8 +19,8 @@ public class CustomerService {
 	public List<Customer> findAll(){
 		return customerRepository.findAll();
 	}
-	public Customer findById(Integer id) {
-		return customerRepository.findById(id).get();
+	public Optional<Customer> findById(Integer id) {
+		return customerRepository.findById(id);
 	}
 	public Customer save(Customer customer) {
 		return customerRepository.save(customer);

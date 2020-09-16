@@ -44,7 +44,7 @@ public class ServiceTypeController {
 	}
 
 	@RequestMapping(value = "/serviceTypes", method = RequestMethod.POST)
-	public ResponseEntity<ServiceType> createServiceTypesTypes(@RequestBody ServiceType serviceTypes, UriComponentsBuilder builder) {
+	public ResponseEntity<ServiceType> createProductTypes(@RequestBody ServiceType serviceTypes, UriComponentsBuilder builder) {
 		serviceTypeService.save(serviceTypes);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(builder.path("/serviceTypes/{id}").buildAndExpand(serviceTypes.getId()).toUri());
@@ -52,7 +52,7 @@ public class ServiceTypeController {
 	}
 
 	@RequestMapping(value = "/serviceTypes/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<ServiceType> updateServiceTypes(@PathVariable("id") Integer id, @RequestBody ServiceType serviceTypes) {
+	public ResponseEntity<ServiceType> updateProductTypes(@PathVariable("id") Integer id, @RequestBody ServiceType serviceTypes) {
 		Optional<ServiceType> currentServiceTypes = serviceTypeService.findById(id);
 
 		if (!currentServiceTypes.isPresent()) {
@@ -66,9 +66,9 @@ public class ServiceTypeController {
 	}
 
 	@RequestMapping(value = "/serviceTypes/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<ServiceType> deleteServiceTypes(@PathVariable("id") Integer id) {
-		Optional<ServiceType> serviceTypes = serviceTypeService.findById(id);
-		if (!serviceTypes.isPresent()) {
+	public ResponseEntity<ServiceType> deleteProductTypes(@PathVariable("id") Integer id) {
+		Optional<ServiceType> productTypes = serviceTypeService.findById(id);
+		if (!productTypes.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		serviceTypeService.delete(id);
