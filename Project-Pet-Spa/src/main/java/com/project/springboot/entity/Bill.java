@@ -43,14 +43,15 @@ public class Bill {
 	this.billCode = billCode;
 	this.date = date;
 	this.customer = customer;
-}
-
-
-
-
+	}
 
 	public String getBillCode() {
 		return billCode;
+	}
+	public Bill(Integer id, Date date) {
+		super();
+		this.id = id;
+		this.date = date;
 	}
 
 
