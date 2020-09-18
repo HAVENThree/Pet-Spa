@@ -43,14 +43,6 @@ public class ProductType {
 		this.ptypCode = ptypCode;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-
 	public Integer getId() {
 		return id;
 	}

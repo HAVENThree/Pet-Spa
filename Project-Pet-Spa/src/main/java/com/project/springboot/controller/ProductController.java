@@ -1,5 +1,8 @@
 package com.project.springboot.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,5 +80,14 @@ public class ProductController {
 		}
 		productService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	@RequestMapping(value = {"alphabetAsc" }, method = RequestMethod.GET)
+	public String ViewProductListAlphabetAsc(Model model) {
+		Comparator<Product> compareName = (Product p1, Product p2) -> p1.getName().compareTo(p2.getName());
+		List<Product> list = new ArrayList<Product>(productService.findAll());
+		Collections.sort(list, compareName);
+		model.addAttribute("products", list);
+		return "productList";
 	}
 }

@@ -59,7 +59,7 @@ public class ProductTypeController {
 		if (!currentProductTypes.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-
+		currentProductTypes.get().setPtypCode(productTypes.getPtypCode());
 		currentProductTypes.get().setName(productTypes.getName());
 
 		productTypeService.save(currentProductTypes.get());
