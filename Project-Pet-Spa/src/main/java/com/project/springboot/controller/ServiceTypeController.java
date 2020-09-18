@@ -59,6 +59,7 @@ public class ServiceTypeController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
+		currentServiceTypes.get().setStypCode(serviceTypes.getStypCode());
 		currentServiceTypes.get().setName(serviceTypes.getName());
 
 		serviceTypeService.save(currentServiceTypes.get());
