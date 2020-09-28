@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="service_type")
 public class ServiceType {
@@ -21,8 +23,9 @@ public class ServiceType {
 	private String stypCode;
 	@Column(length = 50)
 	private String name;
-	
-	@OneToMany(cascade = CascadeType.ALL)
+
+	@JsonBackReference
+	@OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL)
 	private List<Service> services;
 	
 	public ServiceType(){}

@@ -8,9 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "product")
@@ -43,8 +46,8 @@ public class Product {
 	public void setProductType(ProductType productType) {
 		this.productType = productType;
 	}
-
 	@ManyToOne
+	@JoinColumn
 	private ProductType productType;
 
 //	@OneToMany(mappedBy = "products",cascade = CascadeType.ALL)

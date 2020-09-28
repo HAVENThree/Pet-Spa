@@ -21,13 +21,13 @@ public class ServicesTypeService {
 	public List<ServiceType> findAll(){
 		return serviceTypeRepository.findAll();
 	}
-    public Optional<ServiceType> findById(Integer id) {
-        return serviceTypeRepository.findById(id);
+    public ServiceType findById(Integer id) {
+        return serviceTypeRepository.findById(id).get();
     }
 	public ServiceType save(ServiceType serviceType) {
 		return serviceTypeRepository.save(serviceType);
 	}
 	public void delete(Integer id) {
-		serviceTypeRepository.deleteById(id);;
+		serviceTypeRepository.deleteById(id);
 	}
 }

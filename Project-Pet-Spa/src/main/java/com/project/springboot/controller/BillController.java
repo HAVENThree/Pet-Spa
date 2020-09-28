@@ -60,9 +60,10 @@ public class BillController {
 		if (!currentBill.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-
+		
 		currentBill.get().setBillCode(bill.getBillCode());
-
+		currentBill.get().setDate(bill.getDate());
+		
 		billService.save(currentBill.get());
 		return new ResponseEntity<>(currentBill.get(), HttpStatus.OK);
 	}

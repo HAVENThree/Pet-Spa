@@ -20,8 +20,8 @@ public class ProductTypeService {
 	public List<ProductType> findAll(){
 		return productTypeRepository.findAll();
 	}
-    public Optional<ProductType> findById(Integer id) {
-        return productTypeRepository.findById(id);
+    public ProductType findById(Integer id) {
+        return productTypeRepository.findById(id).get();
     }
 	public ProductType save(ProductType productType){
 		return productTypeRepository.save(productType);

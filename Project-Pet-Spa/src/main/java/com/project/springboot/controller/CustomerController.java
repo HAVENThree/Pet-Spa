@@ -60,7 +60,10 @@ public class CustomerController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
+		currentCustomer.get().setCusCode(customer.getCusCode());
 		currentCustomer.get().setName(customer.getName());
+		currentCustomer.get().setPhone(customer.getPhone());
+		currentCustomer.get().setAddress(customer.getAddress());
 
 		customerService.save(currentCustomer.get());
 		return new ResponseEntity<>(currentCustomer.get(), HttpStatus.OK);

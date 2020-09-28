@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="product_type")
 public class ProductType {
@@ -21,8 +23,9 @@ public class ProductType {
 	private String ptypCode;
 	@Column(length = 50)
 	private String name;
-	
-	@OneToMany(cascade = CascadeType.ALL)
+
+	@JsonBackReference
+	@OneToMany(mappedBy = "productType" ,cascade = CascadeType.ALL)
 	private List<Product> products;
 	
 	public ProductType() {}

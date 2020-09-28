@@ -3,11 +3,13 @@ package com.project.springboot.controller;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.project.springboot.dao.ServiceRepository;
 import com.project.springboot.entity.ServiceType;
 import com.project.springboot.services.ServicesTypeService;
+
 @CrossOrigin
 @RestController
+@RequestMapping("")
 public class ServiceTypeController {
 	@Autowired
 	private ServicesTypeService serviceTypeService;
@@ -33,18 +38,16 @@ public class ServiceTypeController {
 		return new ResponseEntity<>(serviceTypes, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/serviceTypes/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ServiceType> getServiceTypesById(@PathVariable("id") Integer id) {
-		Optional<ServiceType> serviceTypes = serviceTypeService.findById(id);
+	@RequestMapping(value = "/serviceTypes/{id}", method = RequestMethod.GET)
+	public ServiceType getServiceTypesById(@PathVariable("id") Integer id) {
+		ServiceType serviceTypes = serviceTypeService.findById(id);
 
-		if (!serviceTypes.isPresent()) {
-			return new ResponseEntity<>(serviceTypes.get(), HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<>(serviceTypes.get(), HttpStatus.OK);
+		return serviceTypes;
 	}
 
 	@RequestMapping(value = "/serviceTypes", method = RequestMethod.POST)
-	public ResponseEntity<ServiceType> createProductTypes(@RequestBody ServiceType serviceTypes, UriComponentsBuilder builder) {
+	public ResponseEntity<ServiceType> createProductTypes(@RequestBody ServiceType serviceTypes,
+			UriComponentsBuilder builder) {
 		serviceTypeService.save(serviceTypes);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(builder.path("/serviceTypes/{id}").buildAndExpand(serviceTypes.getId()).toUri());
@@ -52,27 +55,27 @@ public class ServiceTypeController {
 	}
 
 	@RequestMapping(value = "/serviceTypes/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<ServiceType> updateProductTypes(@PathVariable("id") Integer id, @RequestBody ServiceType serviceTypes) {
-		Optional<ServiceType> currentServiceTypes = serviceTypeService.findById(id);
-
-		if (!currentServiceTypes.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-
-		currentServiceTypes.get().setStypCode(serviceTypes.getStypCode());
-		currentServiceTypes.get().setName(serviceTypes.getName());
-
-		serviceTypeService.save(currentServiceTypes.get());
-		return new ResponseEntity<>(currentServiceTypes.get(), HttpStatus.OK);
+	public ServiceType updateProductTypes(@PathVariable("id") Integer id,
+			@RequestBody @Validated ServiceType serviceTypes) {
+		serviceTypeService.findById(id);
+		return serviceTypeService.save(serviceTypes);
+		
 	}
 
+//	@RequestMapping(value = "/serviceTypes/{id}", method = RequestMethod.DELETE)
+//	public ResponseEntity<ServiceType> deleteProductTypes(@PathVariable("id") Integer id) {
+//		Optional<ServiceType> productTypes = serviceTypeService.findById(id);
+//		if (!productTypes.isPresent()) {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//		serviceTypeService.delete(id);
+//		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//	}
+
 	@RequestMapping(value = "/serviceTypes/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<ServiceType> deleteProductTypes(@PathVariable("id") Integer id) {
-		Optional<ServiceType> productTypes = serviceTypeService.findById(id);
-		if (!productTypes.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		serviceTypeService.delete(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	public void deleteProductTypes(@PathVariable("id") Integer id) {
+		ServiceType serviceTypes = serviceTypeService.findById(id);
+		serviceTypeService.delete(serviceTypes.getId());	
+
 	}
 }

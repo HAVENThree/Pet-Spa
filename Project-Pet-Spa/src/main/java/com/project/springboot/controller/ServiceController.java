@@ -14,18 +14,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.project.springboot.entity.Product;
 import com.project.springboot.entity.ProductType;
 import com.project.springboot.entity.Service;
+import com.project.springboot.entity.ServiceType;
 import com.project.springboot.services.ProductTypeService;
 import com.project.springboot.services.ServicesService;
+import com.project.springboot.services.ServicesTypeService;
 
 @CrossOrigin
 @RestController
 public class ServiceController {
 	@Autowired
 	private ServicesService servicesService;
+	
+	@Autowired
+	private ServicesTypeService stService;
 
 	@RequestMapping(value = "/service", method = RequestMethod.GET)
 	public ResponseEntity<List<Service>> findAll() {
@@ -45,14 +52,23 @@ public class ServiceController {
 		}
 		return new ResponseEntity<>(service.get(), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/service/serviceType/{id}", method = RequestMethod.POST)
+	public Service createService(@RequestBody Service service,@PathVariable("id") Integer id) {
 
-	@RequestMapping(value = "/service", method = RequestMethod.POST)
-	public ResponseEntity<Service> createService(@RequestBody Service service, UriComponentsBuilder builder) {
-		servicesService.save(service);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(builder.path("/service/{id}").buildAndExpand(service.getId()).toUri());
-		return new ResponseEntity<>(service, HttpStatus.CREATED);
+		ServiceType serviceType = this.stService.findById(id);
+		service.setServiceType(serviceType);
+	
+		return 	servicesService.save(service);
 	}
+
+//	@RequestMapping(value = "/service", method = RequestMethod.POST)
+//	public ResponseEntity<Service> createService(@RequestBody Service service, UriComponentsBuilder builder) {
+//		servicesService.save(service);
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setLocation(builder.path("/service/{id}").buildAndExpand(service.getId()).toUri());
+//		return new ResponseEntity<>(service, HttpStatus.CREATED);
+//	}
 
 	@RequestMapping(value = "/service/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Service> updateService(@PathVariable("id") Integer id, @RequestBody Service service) {

@@ -18,18 +18,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.project.springboot.entity.Product;
+import com.project.springboot.entity.ProductType;
+import com.project.springboot.services.FileStorageService;
 import com.project.springboot.services.ProductService;
+import com.project.springboot.services.ProductTypeService;
 
 @CrossOrigin
 @RestController
 public class ProductController {
 	@Autowired
 	private ProductService productService;
-
+	
+	@Autowired
+	private ProductTypeService ptService;
+	 @Autowired
+	    private FileStorageService fileStorageService;
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> findAll() {
 		List<Product> products = productService.findAll();
@@ -49,12 +59,18 @@ public class ProductController {
 		return new ResponseEntity<>(product.get(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/products", method = RequestMethod.POST)
-	public ResponseEntity<Product> createProduct(@RequestBody Product product, UriComponentsBuilder builder) {
-		productService.save(product);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(builder.path("/products/{id}").buildAndExpand(product.getId()).toUri());
-		return new ResponseEntity<>(product, HttpStatus.CREATED);
+	@RequestMapping(value = "/products/productType/{id}", method = RequestMethod.POST)
+	public Product createProduct(@RequestBody Product product,@PathVariable("id") Integer id,  @RequestParam("image") MultipartFile file) {
+
+		ProductType pt = ptService.findById(id);
+		product.setProductType(pt);
+//        String fileName = fileStorageService.storeFile(file);
+// 
+//        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                .path("/downloadFile/")
+//                .path(fileName)
+//                .toUriString();
+		return 	productService.save(product);
 	}
 
 	@RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
@@ -64,7 +80,8 @@ public class ProductController {
 		if (!currentProduct.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-
+		
+		currentProduct.get().setProCode(product.getProCode());
 		currentProduct.get().setName(product.getName());
 		currentProduct.get().setPrice(product.getPrice());
 
@@ -73,21 +90,21 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Product> deleteProduct(@PathVariable("id") Integer id) {
-		Optional<Product> product = productService.findById(id);
-		if (!product.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		productService.delete(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	public Product deleteProduct(@PathVariable("id") Integer id) {
+		Product product = productService.findById(id).get();
+//		if (!product.isPresent()) {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+		productService.delete(product.getId());
+		return product;
 	}
 	
-	@RequestMapping(value = {"alphabetAsc" }, method = RequestMethod.GET)
-	public String ViewProductListAlphabetAsc(Model model) {
-		Comparator<Product> compareName = (Product p1, Product p2) -> p1.getName().compareTo(p2.getName());
-		List<Product> list = new ArrayList<Product>(productService.findAll());
-		Collections.sort(list, compareName);
-		model.addAttribute("products", list);
-		return "productList";
-	}
+//	@RequestMapping(value = {"alphabetAsc" }, method = RequestMethod.GET)
+//	public String ViewProductListAlphabetAsc(Model model) {
+//		Comparator<Product> compareName = (Product p1, Product p2) -> p1.getName().compareTo(p2.getName());
+//		List<Product> list = new ArrayList<Product>(productService.findAll());
+//		Collections.sort(list, compareName);
+//		model.addAttribute("products", list);
+//		return "productList";
+//	}
 }
